@@ -16,3 +16,7 @@ References
 - Ported to the PlayN Framework http://code.google.com/p/playn/
 - Used https://github.com/threerings/tripleplay for Menus
 - Deployed to http://cloudtetris.appspot.com/
+
+Contact
+-------
+rheneas.the.train@hotmail.com
