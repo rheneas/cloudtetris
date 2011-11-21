@@ -7,7 +7,7 @@ Outstanding Features
 --------------------
 - Next block preview
 - Flashing rows on removal
-- Test an Android
+- Test on Android
 - More tests
 
 References
