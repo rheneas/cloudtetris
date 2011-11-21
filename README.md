@@ -9,9 +9,11 @@ Instructions
     mvn clean package
 
 Run java version
+
      mvn test -Ptest-java
 
 Run html version
+
     mvn test -Ptest-html
 
 
