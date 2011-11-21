@@ -131,4 +131,9 @@ public class TetrisBoard {
 		}
 		return true;
 	}
+
+    @Override
+    public String toString()  {
+        return board.toString();
+    }
 }

@@ -14,7 +14,6 @@ public class ScoreRenderer {
     private Label scoreLabel;
     private final GameState gameState;
 
-
     public ScoreRenderer(GroupLayer groupLayer, GameState gameState) {
         this.gameState = gameState;
 

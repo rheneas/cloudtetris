@@ -11,6 +11,7 @@ public class TetrisGame {
     private TetrisPiece currentPiece;
     private TetrisPieceFactory factory;
     private long lastUpdate = 0;
+    private boolean ignoreWait = false;
 
     public TetrisGame() {
         board = new TetrisBoard(NUMBER_OF_COLS, NUMBER_OF_ROWS);
@@ -27,6 +28,10 @@ public class TetrisGame {
             gameState.startPlaying();
             currentPiece = null;
         }
+    }
+
+    public TetrisPiece getCurrentPiece() {
+        return currentPiece;
     }
 
     public PieceType getPieceAt(int x, int y) {
@@ -69,7 +74,7 @@ public class TetrisGame {
     public void cycleThroughOneIteration() {
         long timeSinceLastUpdate = System.currentTimeMillis() - lastUpdate;
 
-        if (timeSinceLastUpdate < gameState.getDelay()) {
+        if (!ignoreWait && (timeSinceLastUpdate < gameState.getDelay())) {
             return;
         }
 
@@ -117,5 +122,14 @@ public class TetrisGame {
 
     public GameState getGameState() {
         return gameState;
+    }
+
+    public void ignoreWait() {
+        ignoreWait = true;
+    }
+
+    @Override
+    public String toString() {
+        return board.toString();
     }
 }
