@@ -1,0 +1,8 @@
+*.iml
+.idea
+core/target/
+android/target/
+html/target
+java/target
+.DS_Store
+*/**/.DS_Store
