@@ -35,10 +35,10 @@ public class TetrisPiece {
 				centrePoint.y++; // Drop
 
 				if (board.willFit(this)) {
-					board.addPiece(this, false);
+					board.addPiece(this);
 				} else {
 					centrePoint.y--; // Undrop
-					board.addPiece(this, true);
+					board.addPiece(this);
 					loop = false;
 					result = false;
 				}
@@ -49,10 +49,10 @@ public class TetrisPiece {
 			doMove(direction);
 
 			if (board.willFit(this)) {
-				board.addPiece(this, true);
+				board.addPiece(this);
 			} else {
 				undoMove(direction);
-				board.addPiece(this, true);
+				board.addPiece(this);
 				result = false;
 			}
 		}

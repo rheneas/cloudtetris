@@ -7,18 +7,12 @@ public class TetrisBoard {
 
 	public static final PieceType EMPTY_BLOCK = null;
 
-	private BoardListener boardListener;
 	private Board board;
 
 	public TetrisBoard(int cols, int rows) {
 		board = new Board(cols, rows);
 	}
 
-	public TetrisBoard(TetrisBoard tetrisBoard) {
-		board = new Board(tetrisBoard.board);
-		boardListener = null;
-	}
-	
 	public void resetBoard() {
 		board = new Board(board.getX(), board.getY());
 	}
@@ -35,11 +29,7 @@ public class TetrisBoard {
 		return board.getPieceAt(x, y);
 	}
 
-	public void setPieceAt(int x, int y, PieceType value) {
-		board.setPieceAt(x, y, value);
-	}
-
-	public void addPiece(TetrisPiece piece, boolean notify) {
+	public void addPiece(TetrisPiece piece) {
 		if (piece != null) {
 			final Point centre = piece.getCentrePoint();
 			final Point[] blocks = piece.getRelativePoints();
@@ -49,10 +39,6 @@ public class TetrisBoard {
 				int y = centre.y + blocks[count].y;
 
 				board.setPieceAt(x, y, piece.getType());
-			}
-
-			if (notify) {
-				fireBoardEvent();
 			}
 		}
 	}
@@ -81,8 +67,6 @@ public class TetrisBoard {
 		for (int tempCol = 0; tempCol < getColumns(); tempCol++) {
 			board.setPieceAt(tempCol, 0, EMPTY_BLOCK);
 		}
-
-		fireBoardEvent();
 	}
 
 	public boolean willFit(TetrisPiece piece) {
@@ -106,12 +90,6 @@ public class TetrisBoard {
 		}
 
 		return result;
-	}
-
-	private void fireBoardEvent() {
-		if (boardListener != null) {
-			boardListener.boardChange(this);
-		}
 	}
 
 	public int removeCompletedLines() {

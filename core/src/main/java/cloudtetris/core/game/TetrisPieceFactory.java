@@ -29,7 +29,7 @@ public class TetrisPieceFactory {
 	private void previewNextPiece(TetrisBoard board, int position) {
 		TetrisPiece tetrisPiece = new TetrisPiece(nextPieces.get(position));
 		tetrisPiece.setCentrePoint(new Point(board.getColumns() / 2, 1));
-		board.addPiece(tetrisPiece, false);
+		board.addPiece(tetrisPiece);
 	}
 	
 	private TetrisPiece newPiece(TetrisBoard board) {

@@ -5,7 +5,6 @@ public class TetrisGame {
     private static final int NUMBER_OF_COLS = 10;
     private static final int NUMBER_OF_ROWS = 20;
 
-    private EventHandler eventHandler;
     private GameState gameState;
     private TetrisBoard board;
     private PreviewBoards previewBoards;
@@ -16,7 +15,6 @@ public class TetrisGame {
     public TetrisGame() {
         board = new TetrisBoard(NUMBER_OF_COLS, NUMBER_OF_ROWS);
         previewBoards = new PreviewBoards(TetrisPieceFactory.NUMBER_OF_PIECES_TO_GENERATE);
-        eventHandler = new EventHandler();
         gameState = new GameState();
         factory = new TetrisPieceFactory(board);
     }
@@ -28,7 +26,6 @@ public class TetrisGame {
             gameState.reset();
             gameState.startPlaying();
             currentPiece = null;
-            eventHandler.fireScoreEvent(gameState.getScore());
         }
     }
 
@@ -87,16 +84,15 @@ public class TetrisGame {
                     gameState.incrementTotalLinesBy(completedLines);
                     gameState.updateDelay();
                     gameState.updateScore(completedLines);
-                    eventHandler.fireScoreEvent(gameState.getScore());
                 }
 
                 currentPiece = factory.getPiece(board);
                 updatePreviewBoards();
 
                 if (board.willFit(currentPiece)) {
-                    board.addPiece(currentPiece, true);
+                    board.addPiece(currentPiece);
                 } else {
-                    board.addPiece(currentPiece, true);
+                    board.addPiece(currentPiece);
                     stopGame();
                 }
             } else {

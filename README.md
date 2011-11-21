@@ -3,6 +3,18 @@ CloudTetris
 
 A tetris clone deployed on appengine using the PlayN framework. I was just hacking to see what the PlayN Framework was like.
 
+Instructions
+------------
+
+    mvn clean package
+
+Run java version
+     mvn test -Ptest-java
+
+Run html version
+    mvn test -Ptest-html
+
+
 Outstanding Features
 --------------------
 - Next block preview
