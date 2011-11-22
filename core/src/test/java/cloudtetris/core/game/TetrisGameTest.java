@@ -25,6 +25,19 @@ public class TetrisGameTest {
     }
 
     @Test
+    public void shouldEndGame() {
+        tetrisGame.startGame();
+
+        for (int i = 0; i < 9; i++) {
+            tetrisGame.cycleThroughOneIteration();
+            tetrisGame.movePiece(FALL);
+        }
+
+        tetrisGame.cycleThroughOneIteration();
+        assertFalse(tetrisGame.getGameState().isPlaying());
+    }
+
+    @Test
     public void shouldMakeALine() {
         tetrisGame.startGame();
         tetrisGame.cycleThroughOneIteration();
