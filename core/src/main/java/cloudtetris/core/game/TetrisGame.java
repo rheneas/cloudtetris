@@ -7,7 +7,6 @@ public class TetrisGame {
 
     private GameState gameState;
     private TetrisBoard board;
-    private PreviewBoards previewBoards;
     private TetrisPiece currentPiece;
     private TetrisPieceFactory factory;
     private long lastUpdate = 0;
@@ -15,7 +14,6 @@ public class TetrisGame {
 
     public TetrisGame() {
         board = new TetrisBoard(NUMBER_OF_COLS, NUMBER_OF_ROWS);
-        previewBoards = new PreviewBoards(TetrisPieceFactory.NUMBER_OF_PIECES_TO_GENERATE);
         gameState = new GameState();
         factory = new TetrisPieceFactory();
     }
@@ -23,7 +21,6 @@ public class TetrisGame {
     public void startGame() {
         if (!gameState.isPlaying()) {
             board.resetBoard();
-            previewBoards.resetBoard();
             gameState.reset();
             gameState.startPlaying();
             currentPiece = null;
@@ -92,7 +89,6 @@ public class TetrisGame {
                 }
 
                 currentPiece = factory.getPiece(board);
-                updatePreviewBoards();
 
                 if (board.willFit(currentPiece)) {
                     board.addPiece(currentPiece);
@@ -104,12 +100,6 @@ public class TetrisGame {
                 movePiece(Direction.DOWN);
             }
         }
-    }
-
-    private void updatePreviewBoards() {
-        previewBoards.resetBoard();
-        factory.setNextPieces(previewBoards.getBoards());
-
     }
 
     public boolean hasStarted() {
