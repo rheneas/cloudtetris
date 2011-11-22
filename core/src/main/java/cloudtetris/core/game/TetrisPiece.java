@@ -18,12 +18,6 @@ public class TetrisPiece {
 		initializeBlocks();
 	}
 	
-	public TetrisPiece(TetrisPiece piece) {
-		this.type = piece.type;
-		this.board = piece.board;
-		initializeBlocks();
-	}
-	
 	public boolean move(Direction direction) {
 		boolean result = true;
 
@@ -191,4 +185,37 @@ public class TetrisPiece {
 			blocks[count].y = temp;
 		}
 	}
+
+    public void newMove(Direction direction) {
+		if (direction == LEFT) {
+			centrePoint.x--;
+		} else if (direction == RIGHT) {
+			centrePoint.x++;
+		} else if (direction == DOWN) {
+			centrePoint.y++;
+		} else if (direction == ROTATE) {
+			rotateClockwise();
+		}
+	}
+
+	public void newUndoMove(Direction direction) {
+		if (direction == LEFT) {
+			centrePoint.x++;
+		} else if (direction == RIGHT) {
+			centrePoint.x--;
+		} else if (direction == DOWN) {
+			centrePoint.y--;
+		} else if (direction == ROTATE) {
+			rotateAntiClockwise();
+		}
+	}
+
+    public void drop() {
+        centrePoint.y++;
+    }
+
+
+    public void unDrop() {
+        centrePoint.y--;
+    }
 }
