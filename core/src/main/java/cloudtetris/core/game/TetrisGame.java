@@ -17,7 +17,7 @@ public class TetrisGame {
         board = new TetrisBoard(NUMBER_OF_COLS, NUMBER_OF_ROWS);
         previewBoards = new PreviewBoards(TetrisPieceFactory.NUMBER_OF_PIECES_TO_GENERATE);
         gameState = new GameState();
-        factory = new TetrisPieceFactory(board);
+        factory = new TetrisPieceFactory();
     }
 
     public void startGame() {
@@ -126,6 +126,10 @@ public class TetrisGame {
 
     public void ignoreWait() {
         ignoreWait = true;
+    }
+
+    public void setRandomNumberGenerator(RandomNumberGenerator randomNumberGenerator) {
+        factory.setRandomNumberGenerator(randomNumberGenerator);
     }
 
     @Override

@@ -5,9 +5,9 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static cloudtetris.core.game.Direction.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static cloudtetris.core.game.Direction.*;
 
 public class TetrisGameTest {
 
@@ -18,15 +18,14 @@ public class TetrisGameTest {
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
+        when(randomNumberGenerator.getRandom()).thenReturn(PieceType.PIECES.indexOf(PieceType.O_PIECE));
+        tetrisGame = new TetrisGame();
+        tetrisGame.setRandomNumberGenerator(randomNumberGenerator);
+        tetrisGame.ignoreWait();
     }
 
     @Test
-    public void shouldPlayGame() {
-        when(randomNumberGenerator.getRandom()).thenReturn(PieceType.PIECES.indexOf(PieceType.O_PIECE));
-        TetrisPieceFactory.randomNumberGenerator = randomNumberGenerator;
-        tetrisGame = new TetrisGame();
-        tetrisGame.ignoreWait();
-        
+    public void shouldMakeALine() {
         tetrisGame.startGame();
         tetrisGame.cycleThroughOneIteration();
 
@@ -53,6 +52,7 @@ public class TetrisGameTest {
         tetrisGame.cycleThroughOneIteration();
 
         assertEquals(2, tetrisGame.getGameState().getLines());
+        assertEquals(400, tetrisGame.getGameState().getScore());
     }
 
     private void move(Direction direction, int times) {
